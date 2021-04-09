@@ -1,5 +1,3 @@
-package algorithm_skill;
-
 public class Bitmask {
 	public static void main(String[] args) {
 		//꽉 찬 집합
