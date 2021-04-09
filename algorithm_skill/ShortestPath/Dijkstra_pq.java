@@ -5,30 +5,21 @@ import java.util.Collections;
 import java.util.PriorityQueue;
 
 public class Dijkstra {
-	static class Pair implements Comparable<Pair> {
-		int first, second;
+	static class Edge implements Comparable<Edge> {
+		int to, cost;
 		
-		public Pair(int first, int second) {
-			this.first = first;
-			this.second = second;
+		public Edge(int to, int cost) {
+		    this.to = to;
+		    this.cost = cost;
 		}
 
 		@Override
 		public int compareTo(Pair o) {
 			// TODO Auto-generated method stub
-			return Integer.compare(this.first, o.first);
+			return Integer.compare(this.cost, o.cost);
 		}
 	}
-	
-	static int V = 100;
-	@SuppressWarnings("unchecked")
-	static ArrayList<Pair>[] adj = new ArrayList[100];
-	
-	public static void main(String[] args) {
-		for(int i = 0; i < 100; i++)
-			adj[i] = new ArrayList<Pair>();
-	}
-	
+
 	static ArrayList<Integer> dijkstra(int src) {
 		ArrayList<Integer> dist = new ArrayList<>(V);
 		Collections.fill(dist, Integer.MAX_VALUE);
@@ -37,13 +28,13 @@ public class Dijkstra {
 		pq.add(new Pair(src, 0));
 		while(!pq.isEmpty()) {
 			Pair p = pq.poll();
-			int here = p.first;
-			int cost = -p.second;
+			int here = p.to;
+			int cost = -p.cost;
 			if(dist.get(here) < cost) continue;
 			
 			for(int i = 0; i < adj[here].size(); ++i) {
-				int there = adj[here].get(i).first;
-				int nextDist = cost + adj[here].get(i).second;
+				int there = adj[here].get(i).to;
+				int nextDist = cost + adj[here].get(i).cost;
 				
 				if(dist.get(there) > nextDist) {
 					dist.set(there, nextDist);

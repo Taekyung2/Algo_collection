@@ -2,7 +2,7 @@ package boj_algorithm._1000;
 
 import java.util.Scanner;
 
-public class _1002_터렛 {
+public class 1002_터렛 {
     static class P {
         int x, y, r;
 

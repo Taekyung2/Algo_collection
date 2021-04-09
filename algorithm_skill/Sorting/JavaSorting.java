@@ -34,11 +34,16 @@ public class ComparableTest {
                new Student(10, 50),
                new Student(5, 10)
         };
+
+
+        // Comparable sorting
        Arrays.sort(students);
        for(Student student : students) {
             System.out.println(student);
        }
 
+
+       // Comparator sorting
        Arrays.sort(students, new Comparator<Student>() {
            @Override
            public int compare(Student o1, Student o2) {
@@ -48,5 +53,12 @@ public class ComparableTest {
        for(Student student : students) {
            System.out.println(student);
        }
+
+
+       // lambda function sorting
+       Arrays.sort(studetns, (o1, o2) -> o2.score - o1.score);
+        for(Student student : students) {
+            System.out.println(student);
+        }
     }
 }

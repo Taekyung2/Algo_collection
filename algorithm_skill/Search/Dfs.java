@@ -29,5 +29,3 @@ public class Dfs {
 				dfs(i);
 	}
 }
-
-//인접 리스트를 사용한 dfs 구현
