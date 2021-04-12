@@ -3,7 +3,7 @@ package boj_algorithm._1000;
 import java.io.*;
 import java.util.*;
 
-public class _1005_ACM_Craft {
+public class Q1005 {
     static int stoi(String s) { return Integer.parseInt(s); };
     static int N, K, ret, e;
     static int[] time, visit;

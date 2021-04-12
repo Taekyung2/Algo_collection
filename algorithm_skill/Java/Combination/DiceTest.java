@@ -1,5 +1,3 @@
-package ssafy_repeat;
-
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -75,6 +73,7 @@ public class DiceTest {
         }
     }
 
+    // 조합
     private static void dice4(int cnt, int cur) {
         if(cnt == N) {
             totalCnt++;

@@ -3,33 +3,39 @@ package ssafy_repeat;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Comb01_basic {
+public class Permutation1 {
     static int N, R;
     static int[] input, number;
+    static boolean[] isSelected;
+    static int totalCnt;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         N = sc.nextInt();
         R = sc.nextInt();
         input = new int[N];
+        isSelected = new boolean[N];
         number = new int[R];
 
         for(int i = 0; i < N; i++) {
             input[i] = sc.nextInt();
         }
-        combination(0, 0);
+        permutation(0);
     }
 
-    // 현재 위치에 조합할 수 선택
-    private static void combination(int cnt, int cur) {
+    private static void permutation(int cnt) {
         if(cnt == R) {
+            totalCnt++;
             System.out.println(Arrays.toString(number));
             return;
         }
-        for(int i = cur; i < N; i++) {
+        // 앞에서 선택된 수 배제
+        for(int i = 0; i < N; i++) {
+            if(isSelected[i]) continue;
             number[cnt] = input[i];
-            // 현재 수의 다음 수부터 시작하도록 전달
-            combination(cnt + 1, i + 1);
+            isSelected[i] = true;
+            permutation(cnt + 1); // 다음 자리의 순열 뽑기
+            isSelected[i] = false;
         }
     }
 }
