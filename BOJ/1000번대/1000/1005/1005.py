@@ -1,8 +1,6 @@
 import sys
 
 read = sys.stdin.readline
-sys.setrecursionlimit(100000)
-
 
 def dp(w):
     if cache[w] != -1:
