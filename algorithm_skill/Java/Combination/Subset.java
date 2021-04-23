@@ -2,7 +2,7 @@ package ssafy_repeat;
 
 import java.util.Scanner;
 
-public class Subset_test {
+public class Subset{
 
     static int N, totalCnt;
     static int[] input;
