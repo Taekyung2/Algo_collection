@@ -1,0 +1,5 @@
+n = int(input())
+score = list(map(int, input().split()))
+m = max(score)
+new = list(map(lambda x: x / m * 100, score))
+print(sum(new) / len(new))
