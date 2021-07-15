@@ -1,19 +1,25 @@
+package boj;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Q1026 {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int[] a = new int[n];
-        int[] b = new int[n];
-        for(int i = 0; i < n; i++) a[i] = sc.nextInt();
-        for(int i = 0; i < n; i++) b[i] = sc.nextInt();
-        Arrays.sort(a);
-        Arrays.sort(b);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
         int ret = 0;
-        for(int i = 0; i < n; i++)
-            ret += a[i] * b[n - 1 - i];
+
+        int[] A = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int[] B = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+
+        Arrays.sort(A);
+        Arrays.sort(B);
+
+        for(int i = 0; i < N; i++)
+            ret += A[i] * B[N - i - 1];
+
         System.out.println(ret);
     }
 }
