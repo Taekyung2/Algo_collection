@@ -1,9 +1,18 @@
-package boj_algorithm._20900;
+package boj;
+
+/**
+ * # 계획
+ *  1. 자주 나오는 단어 순
+ *  2. 단어 길이가 길수록 앞
+ *  3. 알파벳 사전순으로
+ *  4. M길이 이상 단어만 출력
+ *  -> Stream, Comparator 사용
+ */
 
 import java.io.*;
 import java.util.*;
 
-public class _20920_영단어암기는괴로워 {
+public class Q20920 {
     static int N, M;
     static HashMap<String, Integer> dict = new HashMap<>();
     static ArrayList<String> list = new ArrayList<>();

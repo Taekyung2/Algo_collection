@@ -1,52 +1,51 @@
-import java.util.*;
+package boj;
+
+/**
+ * # 계획
+ *  전체 맵을 순회하면서 1이 나오면 dfs or bfs, 방문처리
+ *  서치 알고리즘이 실행된 횟수가 답
+ */
+
+import java.util.Scanner;
 
 public class Q1012 {
-    static int N, M, K;
-    static boolean[][] map;
+    static int M, N, K;
     static int[] dy = {-1, 0, 1, 0}, dx = {0, 1, 0, -1};
+    static int[][] map;
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         int tc = sc.nextInt();
         while(tc-- > 0) {
             M = sc.nextInt();
             N = sc.nextInt();
             K = sc.nextInt();
-            map = new boolean[N][M];
+            map = new int[N][M];
             int ret = 0;
-
             for(int i = 0; i < K; i++) {
-                int x = sc.nextInt();
-                int y = sc.nextInt();
-                map[y][x] = true;
+                 int x = sc.nextInt();
+                 int y = sc.nextInt();
+                 map[y][x] = 1;
             }
 
-            for(int y = 0; y < N; y++)
-                for(int x = 0; x < M; x++)
-                    if(map[y][x]) {
-                        bfs(y, x);
+            for(int i = 0; i < N; i++)
+                for(int j = 0; j < M; j++)
+                    if(map[i][j] == 1) {
+                        dfs(i, j);
                         ret++;
                     }
+
             System.out.println(ret);
         }
     }
 
-    public static void bfs(int y, int x) {
-        Queue<int[]> q = new LinkedList<>();
-        q.add(new int[]{y, x});
-        map[y][x] = false;
-
-        while(!q.isEmpty()) {
-            int[] cur = q.poll();
-
-            for(int d = 0; d < 4; d++) {
-                int ny = cur[0] + dy[d];
-                int nx = cur[1] + dx[d];
-                if(ny >= 0 && nx >= 0 && ny < N && nx < M && map[ny][nx]) {
-                    q.add(new int[]{ny, nx});
-                    map[ny][nx] = false;
-                }
-            }
+    public static void dfs(int y, int x) {
+        map[y][x] = 0;
+        for(int d = 0; d < 4; d++) {
+            int ny = y + dy[d], nx = x + dx[d];
+            if(ny < 0 || nx < 0 || ny >= N || nx >= M) continue;
+            if(map[ny][nx] == 1)
+                dfs(ny, nx);
         }
     }
 }
