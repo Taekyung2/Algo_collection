@@ -1,11 +1,18 @@
-import java.util.LinkedList;
-import java.util.Queue;
+package boj;
+
+/**
+ *  # 계획
+ *  1. 4중 for문으로 독주머니를 둘 좌표 2곳을 선정하자
+ *  2. 이 두 좌표와, 마을들의 거리 중 가장 먼 거리가 행성을 초토화 시킬 수 있는 시간!
+ */
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Q15812 {
     static int N, M, town = 0;
+    static ArrayList<int[]> towns = new ArrayList<>();
     static char[][] map;
-    static int[] dy = {-1, 0, 1, 0}, dx = {0, 1, 0, -1};
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -17,7 +24,7 @@ public class Q15812 {
             for(int j = 0; j < M; j++) {
                 map[i][j] = s.charAt(j);
                 if(map[i][j] == '1')
-                    town++;
+                    towns.add(new int[]{i, j});
             }
         }
         int ret = Integer.MAX_VALUE;
@@ -27,40 +34,20 @@ public class Q15812 {
                 for(int ii = i; ii < N; ii++) {
                     for(int jj = (ii == i ? j + 1 : 0); jj < M; jj++) {
                         if(map[ii][jj] == '1') continue;
-                        ret = Math.min(ret, bfs(i, j, ii, jj));
+                        ret = Math.min(ret, getDistance(i, j, ii, jj));
                     }
                 }
             }
         }
-        System.out.println(ret + 1);
+        System.out.println(ret);
     }
 
-    public static int bfs(int y, int x, int yy, int xx) {
-        Queue<int[]> q = new LinkedList<>();
-        boolean[][] visited = new boolean[N][M];
-        q.add(new int[]{y, x});
-        q.add(new int[]{yy, xx});
-        visited[y][x] = true;
-        visited[yy][xx] = true;
-        int cnt = 0, time = 0;
-
-        while(!q.isEmpty()) {
-            for (int s = 0; s < q.size(); s++) {
-                int[] cur = q.poll();
-                if (map[cur[0]][cur[1]] == '1') {
-                    cnt++;
-                }
-                if(cnt == town) return time;
-                for (int d = 0; d < 4; d++) {
-                    int ny = cur[0] + dy[d], nx = cur[1] + dx[d];
-                    if (ny < 0 || nx < 0 || ny >= N || nx >= M || visited[ny][nx])
-                        continue;
-                    visited[ny][nx] = true;
-                    q.add(new int[]{ny, nx});
-                }
-            }
-            time++;
-        }
-        return Integer.MAX_VALUE;
+    public static int getDistance(int y1, int x1, int y2, int x2) {
+        return towns.stream()
+                .map(town -> Math.min(
+                        Math.abs(town[0] - y1) + Math.abs(town[1] - x1),
+                        Math.abs(town[0] - y2) + Math.abs(town[1] - x2)))
+                .mapToInt(Integer::intValue)
+                .max().getAsInt();
     }
 }
