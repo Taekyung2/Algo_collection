@@ -1,17 +1,8 @@
 package boj;
 
-/**
- *  # 계획
- *  1. 만약 처음부터 10이라면 카운트
- *  2. 10의 배수일 때
- *      - 20 -> 1번 자르면 2개
- *      - 30 -> 2번 자르면 3개
- *      -> 10의 배수 중 작은거 부터 잘라나가는게 유리하겠다.
- *   3. 10의 배수가 아닐 때
- *      - 자르는 횟수 만큼 카운트
- */
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
 
 public class Q16206 {
     static int N, M, ret = 0;
