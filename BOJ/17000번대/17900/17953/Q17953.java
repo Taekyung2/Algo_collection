@@ -1,19 +1,9 @@
-package boj_algorithm._17000번대._17900;
+package boj;
 
 import java.io.*;
 import java.util.*;
 
-public class _17953_디저트 {
-
-    /**
-     *  1. 결과 : 성공
-     *  2. 시간 복잡도 : O( N * M * M )
-     *      - 이유 : dp 부분 문제 개수(N * M) * 부분 문제 시간(반복문 M)
-     *  3. 아이디어
-     *      - dp(day, prev) : 전 날 prev번째 디저트를 먹었을 때, 오늘 얻을 수 있는 최대 만족도
-     *      - 완전 탐색, 메모이제이션
-     */
-
+public class Q17953 {
     static int N, M;
     static int[][] dessert, cache;
 
@@ -22,6 +12,7 @@ public class _17953_디저트 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
+
         N = stoi(st.nextToken());
         M = stoi(st.nextToken());
         dessert = new int[M][N];
@@ -33,19 +24,22 @@ public class _17953_디저트 {
             for (int j = 0; j < N; j++)
                 dessert[i][j] = stoi(st.nextToken());
         }
+
         System.out.println(dp(0, 0));
     }
 
     static int dp(int day, int prev) {
         if(day == N) return 0;
+
         int ret = cache[prev][day];
         if(ret != -1) return ret;
+
         ret = 0;
         for(int i = 0; i < M; i++) {
-            int cur = dessert[i][day];
             if(day != 0 && i == prev)
-                cur /= 2;
-            ret = Math.max(ret ,dp(day + 1, i) + cur);
+                ret = Math.max(ret ,dp(day + 1, i) + dessert[i][day] / 2);
+            else
+                ret = Math.max(ret ,dp(day + 1, i) + dessert[i][day]);
         }
         return cache[prev][day] = ret;
     }

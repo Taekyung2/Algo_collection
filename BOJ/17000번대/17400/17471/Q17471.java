@@ -1,8 +1,9 @@
-package boj_algorithm._17000번대._17400;
+package boj;
 
+import java.io.*;
 import java.util.*;
 
-public class _17471_게리맨더링 {
+public class Q17471 {
     static int N, ret = Integer.MAX_VALUE;
     static int[] people;
     static boolean[] chk;
@@ -14,19 +15,23 @@ public class _17471_게리맨더링 {
         adj = new ArrayList[N];
         people = new int[N];
         chk = new boolean[N];
+
         for(int i = 0; i < N; i++) {
             people[i] = sc.nextInt();
             adj[i] = new ArrayList<>();
         }
+
         for(int i = 0; i < N; i++) {
-           int s = sc.nextInt();
-           for(int j = 0; j < s; j++)
+            int s = sc.nextInt();
+            for(int j = 0; j < s; j++)
                 adj[i].add(sc.nextInt() - 1);
         }
+
         for(int i = 1; i <= N / 2; i++) {
             Arrays.fill(chk, false);
             comb(i, 0, 0);
         }
+
         System.out.println((ret == Integer.MAX_VALUE) ? -1 : ret);
     }
 
@@ -36,6 +41,7 @@ public class _17471_게리맨더링 {
                 ret = Math.min(ret, count());
             return;
         }
+
         if(idx >= N) return;
         chk[idx] = true;
         comb(num, idx + 1, cnt + 1);
@@ -65,8 +71,10 @@ public class _17471_게리맨더링 {
                 q.add(next);
             }
         }
+
         for(int num : list)
             if(!visited[num]) return false;
+
         return true;
     }
 
