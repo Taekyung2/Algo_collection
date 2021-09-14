@@ -1,5 +1,3 @@
-package boj;
-
 import java.util.Scanner;
 
 public class Q1011 {
